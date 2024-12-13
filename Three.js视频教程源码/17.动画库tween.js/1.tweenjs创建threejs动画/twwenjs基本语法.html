@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：www.webgl3d.cn</title>
+</head>
+
+<body>
+    <!-- type="importmap"功能：tween在html学习环境和开发环境一样写法 -->
+    <script type="importmap">
+        {
+			"imports": {
+				"@tweenjs/tween.js": "./tween.esm.js"
+			}
+		}
+	</script>
+    <script type="module">
+        import TWEEN from '@tweenjs/tween.js';
+
+        
+        const pos = {x: 0,y: 0};
+        const tween = new TWEEN.Tween(pos);//创建一段tween动画
+        //经过2000毫秒，pos对象的x和y属性分别从零变化为100、50
+        tween.to({x: 100,y: 50}, 2000);
+        //tween动画开始执行
+        tween.start();
+
+        function loop() {
+            //在requestAnimationFrame动画中，tween更新.update()，tween才能正常执行
+            TWEEN.update();
+            // 测试tweenjs是否逐渐改变pos对象的x和y属性
+            console.log(pos.x,pos.y);
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+
+</html>
